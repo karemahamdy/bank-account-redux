@@ -81,4 +81,49 @@ store.dispatch({
 console.log(store.getState());
 
 
+
+function deposit(amount) {
+  return { type: "account/deposit", payload: amount };
+}
+
+function withdraw(amount) {
+  return { type: "account/withdraw", payload: amount };
+}
+
+function requestLoan(amount, purpose) {
+  return {
+    type: "account/requestLoan",
+    payload: { amount, purpose },
+  };
+}
+
+function payLoan() {
+  return { type: "account/payLoan" };
+}
+
+store.dispatch(deposit(500));
+store.dispatch(withdraw(200));
+console.log(store.getState());
+
+store.dispatch(requestLoan(1000, "Buy a cheap car"));
+console.log(store.getState());
+store.dispatch(payLoan());
+console.log(store.getState());
+
+function createCustomer(fullName, nationalID) {
+  return {
+    type: "customer/createCustomer",
+    payload: { fullName, nationalID, createdAt: new Date().toISOString() },
+  };
+}
+
+function updateName(fullName) {
+  return { type: "account/updateName", payload: fullName };
+}
+
+store.dispatch(createCustomer("Jonas Schmedtmann", "24343434"));
+store.dispatch(deposit(250));
+console.log(store.getState());
+
+
 export default Store;
